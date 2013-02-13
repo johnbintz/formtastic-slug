@@ -41,9 +41,29 @@ class SlugInput < Formtastic::Inputs::StringInput
     var targetField = $('##{target_dom_id}');
     var slugField = $('##{dom_id}');
     var slugInputWrap = $('##{dom_id}_input');
+    var existingSlugs = #{options[:existing_slugs].to_json}
+    var startingSlug = slugField.val();
 
     var setSlug = function(text) {
-      slugField.val(text.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+      var i, k;
+
+      var originalSlug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      var newSlug = originalSlug;
+      var index = 0;
+
+      while (true) {
+        for (i = 0, j = existingSlugs.length; i < j; ++i) {
+          if (newSlug != startingSlug && newSlug == existingSlugs[i]) {
+            index += 1;
+            newSlug = originalSlug + "-" + String(index);
+            break;
+          }
+        }
+
+        break;
+      }
+
+      slugField.val(newSlug);
     };
 
     targetField.on('blur change', function(e) {
