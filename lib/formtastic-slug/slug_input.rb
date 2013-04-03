@@ -34,6 +34,10 @@ class SlugInput < Formtastic::Inputs::StringInput
     target_method_name.to_s.gsub(/[\?\/\-]$/, '')
   end
 
+  def existing_slugs
+    options[:existing_slugs] || []
+  end
+
   def slug_js_setup
     (<<-JS).html_safe
 <script type="text/javascript">
@@ -41,7 +45,7 @@ class SlugInput < Formtastic::Inputs::StringInput
     var targetField = $('##{target_dom_id}');
     var slugField = $('##{dom_id}');
     var slugInputWrap = $('##{dom_id}_input');
-    var existingSlugs = #{options[:existing_slugs].to_json}
+    var existingSlugs = #{existing_slugs.to_json};
     var startingSlug = slugField.val();
 
     var setSlug = function(text) {
