@@ -51,7 +51,7 @@ class SlugInput < Formtastic::Inputs::StringInput
     var setSlug = function(text) {
       var i, k;
 
-      var originalSlug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/, '');
+      var originalSlug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       var newSlug = originalSlug;
       var index = 0;
 
