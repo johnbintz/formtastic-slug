@@ -9,9 +9,9 @@ class SlugInput < Formtastic::Inputs::StringInput
   end
 
   def action_buttons
-    template.button_tag('Edit', 'data-mode' => 'disabled', 'data-action' => 'edit') <<
-    template.button_tag('Update', 'data-mode' => 'enabled', 'data-action' => 'update', :style => 'display: none') <<
-    template.button_tag('Cancel', 'data-mode' => 'enabled', 'data-action' => 'cancel', :style => 'display: none')
+    template.button_tag('Edit', :type => 'edit', 'data-mode' => 'disabled', 'data-action' => 'edit') <<
+    template.button_tag('Update', :type => 'update', 'data-mode' => 'enabled', 'data-action' => 'update', :style => 'display: none') <<
+    template.button_tag('Cancel', :type => 'cancel', 'data-mode' => 'enabled', 'data-action' => 'cancel', :style => 'display: none')
   end
 
   def input_html_options
